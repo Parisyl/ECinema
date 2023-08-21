@@ -1,0 +1,9 @@
+<template>
+  <Container :msg="msg" />
+</template>
+
+<script setup lang="ts">
+import Container from "@/components/ContainerComponent.vue";
+import { ref } from 'vue';
+const msg = ref('标签：综艺')
+</script>

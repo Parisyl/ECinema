@@ -1,0 +1,11 @@
+<template>
+  <Container :msg="msg" />
+</template>
+
+<script setup lang="ts">
+import Container from "@/components/ContainerComponent.vue";
+import { ref } from 'vue';
+
+const msg = ref('分类：豆瓣电影Top250')
+</script>
+
