@@ -46,13 +46,11 @@ import router from "@/router";
 import {reactive, ref} from "vue";
 import {Search} from '@element-plus/icons-vue'
 
-
 const handleSelect = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
 
 const activeIndex = ref('0')
-// const size = ref("30")
 
 const items = reactive([
   {id: '1', name: '所有电影', path: '/category/movie'},
@@ -102,8 +100,12 @@ const subs = reactive([
 
 ])
 
-const onClick = (path) => {
+const onClick = (path: string) => {
   router.push(path)
+}
+
+const onSearch = () => {
+
 }
 
 const search = ref('')

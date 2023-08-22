@@ -42,7 +42,7 @@
 import {reactive} from 'vue';
 import {User, Lock, StarFilled } from '@element-plus/icons-vue'
 import {ElMessage} from 'element-plus';
-import router from '@/router/index.ts'
+import router from '@/router/index'
 
 const form = reactive({
   account: '',

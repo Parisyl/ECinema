@@ -7,13 +7,13 @@
         </div>
 
         <div class="align-to-center">
-          <router-link :to="`/login`">立即登录</router-link>
+          <router-link style="text-decoration: none; font-size: 15px;"  :to="`/login`">立即登录</router-link>
           <el-divider direction="vertical"></el-divider>
-          <router-link :to="`/register`">立即注册</router-link>
+          <router-link style="text-decoration: none; font-size: 15px;" :to="`/register`">立即注册</router-link>
           <el-divider direction="vertical"></el-divider>
-          <router-link :to="`/recover`">忘记密码</router-link>
+          <router-link style="text-decoration: none; font-size: 15px;" :to="`/recover`">忘记密码</router-link>
           <el-divider direction="vertical"></el-divider>
-          <router-link :to="`/`">免费体验</router-link>
+          <router-link style="text-decoration: none; font-size: 15px;" :to="`/index`">免费体验</router-link>
         </div>
         <div class="beian">
           <a style="color: grey; font-size: 12px;" href="https://beian.miit.gov.cn/">
@@ -36,7 +36,7 @@
 <style scoped>
 
 .poster {
-  background-image: url(https://api.yimian.xyz/img?type=wallpaper);
+  background-image: url(https://source.unsplash.com/1280x720/?movie);
   background-size: cover;
   background-position: right center;
   width: 70vw;
@@ -68,7 +68,7 @@
 }
 
 a {
-  color: #03a6ff;
+  color: rgb(64, 158, 255);;
 }
 
 @media screen and (max-width: 600px) { /* 调整 600px 为适当的阈值 */

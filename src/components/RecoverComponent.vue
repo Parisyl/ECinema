@@ -51,7 +51,8 @@ import {reactive} from 'vue';
 import router from '@/router/index.js'
 import {User, Lock, Message} from '@element-plus/icons-vue'
 import {ElMessage} from 'element-plus';
-import {post, nameReg, phoneReg, emailReg, passwordReg} from '../utils/tools'
+import {nameReg, phoneReg, emailReg, passwordReg} from '@/utils/tools'
+import axios from 'axios'
 
 const form = reactive({
   account: '',
@@ -67,74 +68,70 @@ const table = reactive({
   isCounting: false
 })
 
-const sendCodeToRegister = () => {
+const sendCodeToRegister = async () => {
   if (!phoneReg.test(form.account) && !emailReg.test(form.account)) {
-    ElMessage.warning('请输入正确的手机号码或邮箱')
-  } else if (phoneReg.test(form.account)) {
-    post('/before/SendMessageToRegister', {
-      account: form.account
-    }, (response: string) => {
+    ElMessage.warning('请输入正确的手机号码或邮箱');
+    return;
+  }
 
-      ElMessage.success(response)
-      table.countdown = 60;
-      table.isCounting = true;
-      const timer = setInterval(() => {
-        table.countdown--;
-        if (table.countdown === 0) {
-          clearInterval(timer);
-          table.isCounting = false;
-        }
-      }, 1000)
-    }, (response: string) => {
-      ElMessage.warning(response)
-    })
-  } else if (emailReg.test(form.account)) {
-    post('/before/SendEmailToRegister', {
-      account: form.account
-    }, (response: string) => {
-      ElMessage.success(response)
-      table.countdown = 60;
-      table.isCounting = true;
-      const timer = setInterval(() => {
-        table.countdown--;
-        if (table.countdown === 0) {
-          clearInterval(timer);
-          table.isCounting = false;
-        }
-      }, 1000)
-    }, (response: string) => {
-      ElMessage.warning(response)
-    })
+  try {
+    if (phoneReg.test(form.account)) {
+      await axios.post('/before/SendMessageToRegister', {
+        account: form.account
+      });
+    } else if (emailReg.test(form.account)) {
+      await axios.post('/before/SendEmailToRegister', {
+        account: form.account
+      });
+    }
+  }
+  catch (error: any) {
+    ElMessage.warning(error.message);
   }
 }
 
 const recover = () => {
   if (!phoneReg.test(form.account) && !emailReg.test(form.account)) {
     ElMessage.warning('手机号码或邮箱或格式有误')
+    return;
   } else if (!form.verify) {
     ElMessage.warning('请输入验证码')
+    return;
   } else if (!form.password || !form.password1) {
     ElMessage.warning('请输入密码')
+    return;
   } else if (!nameReg.test(form.username)) {
     ElMessage.warning('用户名限定长度为4-16个只能包含中文、英文、数字、下划线和减号的字符')
+    return;
   } else if (!passwordReg.test(form.password)) {
     ElMessage.warning('密码需包含大小写字母数字和特殊符号')
+    return;
   } else if (!form.checked) {
     ElMessage.warning('请同意相关协议和政策')
+    return;
   } else {
-    post('/before/register', {
+    let requestPromise;
+
+    requestPromise = axios.post('/before/register', {
       account: form.account,
       verify: form.verify,
       username: form.username,
       password: form.password
-    }, (response: string) => {
-      ElMessage.success(response)
-      router.push('/')
-    }, (response: string) => {
-      ElMessage.warning(response)
-    })
+    });
+
+    if (requestPromise) {
+      requestPromise
+          .then((response) => {
+            ElMessage.success(response.data); // 假设服务器返回的消息在 response.data 中
+            router.push('/login')
+          })
+          .catch((error) => {
+            ElMessage.warning(error.message); // 处理请求失败的情况
+          });
+    }
   }
 }
+
 </script>
 
 <style scoped>
