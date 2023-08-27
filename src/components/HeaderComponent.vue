@@ -31,8 +31,8 @@
       <div class="div-search">
         <el-input class="el-input--search" placeholder="可以搜索影视剧的豆瓣编号" v-model="search">
           <template #suffix>
-            <el-icon :size="25">
-              <Search @click="onSearch"  style="color: #4ea1d3; margin-right: 8px; cursor: pointer" />
+            <el-icon :size="20">
+              <Search @click="onSearch" style="color: #4ea1d3; cursor: pointer" />
             </el-icon>
           </template>
         </el-input>

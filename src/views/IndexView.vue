@@ -25,7 +25,7 @@ import HeaderComponent from "../components/HeaderComponent.vue";
 }
 
 .el-header {
-  --el-header-padding: 20px 10px;
+  --el-header-padding: 20px 15px;
   height: 70px;
 }
 
