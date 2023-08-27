@@ -55,8 +55,8 @@ const activeIndex = ref('0')
 const items = reactive([
   {id: '1', name: '所有电影', path: '/category/movie'},
   {id: '2', name: '连载剧集', path: '/category/airing'},
-  {id: '3', name: '本季新番', path: '/category/anime'},
-  {id: '4', name: '动画', path: '/category/anime/new-bangumi'},
+  {id: '3', name: '本季新番', path: '/category/anime/new-bangumi'},
+  {id: '4', name: '动画', path: '/category/anime/'},
 ])
 
 const subs = reactive([
@@ -146,10 +146,6 @@ const search = ref('')
 
 el-sub-menu.is-active {
   border-bottom: 0 !important;
-}
-
-.div-search {
-  margin-right: 30px;
 }
 
 .el-input--search {

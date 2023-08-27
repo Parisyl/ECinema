@@ -19,7 +19,6 @@
         </el-card>
       </el-col>
     </el-row>
-
   </div>
 
 </template>
@@ -27,17 +26,18 @@
 <script lang="ts" setup>
 import {reactive} from 'vue'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const props = defineProps({
-  msg: {
-    type: String,
-    default: ""
-  },
-  line: {
-    type: Boolean,
-    default: true
-  }
-})
+defineProps(
+    {
+      msg: {
+        type: String,
+        default: ''
+      },
+      line: {
+        type: Boolean,
+        default: true
+      }
+    }
+)
 
 const cards = reactive([
   {index: 1, name: '外星人也难民', image: 'https://vip1.loli.net/2020/05/09/DfCdWP7sKEjghlN.jpg'},
@@ -79,7 +79,7 @@ const cards = reactive([
 <style scoped>
 
 .container {
-  margin: 40px 200px;
+  margin: 50px 200px;
 }
 
 .el-card {
@@ -122,7 +122,7 @@ const cards = reactive([
 }
 
 .el-row {
-  margin: 20px 100px;
+  margin: 40px 100px;
 }
 
 .el-col {

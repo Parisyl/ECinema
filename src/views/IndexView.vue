@@ -4,7 +4,6 @@
       <el-header>
         <HeaderComponent />
       </el-header>
-
       <el-main>
         <router-view />
       </el-main>
@@ -26,7 +25,8 @@ import HeaderComponent from "../components/HeaderComponent.vue";
 }
 
 .el-header {
-  --el-header-padding: 10px 15px;
+  --el-header-padding: 20px 10px;
+  height: 70px;
 }
 
 .el-container {
