@@ -22,7 +22,6 @@
         </div>
       </el-aside>
       <el-main class="poster">
-
       </el-main>
     </el-container>
   </div>

@@ -3,19 +3,10 @@ import {ElMessage} from "element-plus";
 
 const defaultError = () => ElMessage.error('发生了一些错误，请联系管理员')
 const defaultFailure = (message: string) => ElMessage.error(message)
-
-
-// const phoneReg = /^1[3,4,5,7,8][0-9]{9}$/
 const phoneReg: RegExp = /^1[34578][0-9]{9}$/;
-
 const emailReg = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
-// const passwordReg = /^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*[\W]).{6,}$/
 const passwordReg: RegExp = /^(?=.*[a-zA-Z])(?=.*[1-9])(?=.*W).{6,}$/;
-
 const nameReg: RegExp = /^[\u4e00-\u9fa5a-zA-Z0-9_-]{4,16}$/
-
-const localServer = 'https://1.15.89.164:8443/EasyDrive'
-
 function post(url: string, requestData: object, successCallback: Function, failureCallback: Function = defaultFailure, errorCallback: Function = defaultError) {
     axios.post(url, requestData, {
         withCredentials: true
@@ -65,4 +56,4 @@ function get(url: string, successCallback: Function, failureCallback: Function =
     })
 }
 
-export {get, post, loginPost, nameReg, phoneReg, emailReg, passwordReg, localServer}
+export {get, post, loginPost, nameReg, phoneReg, emailReg, passwordReg}
