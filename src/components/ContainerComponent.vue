@@ -5,7 +5,7 @@
       <hr class="horizon-line" v-show="line">
     </div>
 
-    <div style="flex: 1; display: flex; flex-wrap: wrap; justify-content: center; margin: 60px">
+    <div style="flex: 1; display: flex; flex-wrap: wrap; justify-content: center; margin: 60px;">
       <div style="margin: 0 30px 50px;" v-for="card in cards"
            :key="card.index">
         <div :style="'background-image: url(' + card.poster + '); background-size: cover;'"
@@ -99,6 +99,7 @@ const handlePageChange = (newPage) => {
   height: 350px;
   width: 250px;
   overflow: hidden;
+  box-shadow: 5px 10px 10px rgb(25,25,35);
 }
 
 .image-text {
