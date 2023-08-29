@@ -1,6 +1,6 @@
 <template>
   <div class="common-layout">
-    <div class="container" style="margin:auto 40px; display: flex; flex-direction: column;">
+    <div class="container">
       <HeaderComponent style="margin-top: 30px;"></HeaderComponent>
       <router-view/>
     </div>
@@ -16,6 +16,14 @@ import HeaderComponent from "../components/HeaderComponent.vue";
 <style scoped>
 .common-layout {
   background-color: rgb(42, 42, 42);
+  height: 100%;
+  min-height: 1024px;
+}
+
+.container {
+  margin:auto 40px;
+  display: flex;
+  flex-direction: column;
 }
 
 </style>

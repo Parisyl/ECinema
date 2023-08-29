@@ -1,36 +1,46 @@
 <template>
-  <div class="container">
-    <h1 style="color: #4ea1d3; font-size: 23px">{{ msg }}</h1>
-    <hr class="horizon-line" v-show="line">
+  <div>
+    <div style="margin: 10px 12.5%; min-width: 100px;">
+      <h1 style="color: #4ea1d3; font-size: 20px">{{ msg }}</h1>
+      <hr class="horizon-line" v-show="line">
+    </div>
 
-    <el-row :gutter="40">
-      <el-col
-          v-for="card in cards"
-          :key="card.index"
-          :span="size"
-      >
+    <div style="flex: 1; display: flex; flex-wrap: wrap; justify-content: center; margin: 60px">
+      <div style="margin: 0 30px 50px;" v-for="card in cards"
+           :key="card.index">
         <div :style="'background-image: url(' + card.poster + '); background-size: cover;'"
              class="image-container">
           <div class="image-text">{{ card.name }}</div>
         </div>
-      </el-col>
-    </el-row>
+      </div>
+    </div>
   </div>
-
+  <div class="page-container">
+    <el-pagination
+        layout="prev, pager, next"
+        background
+        :current-page="currentPage"
+        :page-size="pageSize"
+        :total="totalItems"
+        @current-change="handlePageChange"
+        class="pagination"
+    ></el-pagination>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import {computed, onMounted, ref} from 'vue'
+import {onMounted, ref} from 'vue'
 import axios from "axios";
 
 const cards = ref([])
 
 onMounted(() => {
-  axios.get('https://api.wmdb.tv/api/v1/top?type=Imdb&skip=0&limit=50&lang=Cn')
+  axios.get('https://api.wmdb.tv/api/v1/top?type=Imdb&skip=0&limit=100&lang=Cn')
       .then(res => {
         console.log(res.data)
-        for (let i = 1; i < 40; i++) {
+        for (let i = 0; i < 20; i++) {
           cards.value.push({
+            id: i,
             poster: res.data[i].data[0].poster,
             name: res.data[i].data[0].name
           });
@@ -40,6 +50,7 @@ onMounted(() => {
         console.log(error)
       })
 });
+
 
 defineProps(
     {
@@ -54,46 +65,50 @@ defineProps(
     }
 )
 
-const size = computed(() => {
-  if (window.innerWidth >= 1200) {
-    return 6
-  } else if (window.innerWidth >= 800 && window.innerWidth < 1200) {
-    return 8
-  } else if (window.innerWidth >= 400 && window.innerWidth < 800) {
-    return 12
-  } else {
-    return 24
-  }
-})
+const currentPage = ref(1);
+const pageSize = ref(20);
+const totalItems = ref(100);
+
+// 处理页数变化
+const handlePageChange = (newPage) => {
+  axios.get('https://api.wmdb.tv/api/v1/top?type=Imdb&skip=0&limit=1000&lang=Cn')
+      .then(res => {
+        console.log(res.data)
+        cards.value = [];
+        for (let i = (newPage - 1) * 20; i < newPage * 20; i++) {
+          cards.value.push({
+            id: i,
+            poster: res.data[i].data[0].poster,
+            name: res.data[i].data[0].name
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  currentPage.value = newPage;
+};
 
 </script>
 
 <style scoped>
 
-.container {
-  margin: 50px 200px;
-}
-
 .image-container {
+  cursor: pointer;
   position: relative;
-  height: 390px; /* Adjust the desired height */
+  height: 350px;
+  width: 250px;
   overflow: hidden;
-}
-
-.image {
-  width: 100%;
-  display: block;
-  object-fit: cover;
 }
 
 .image-text {
   position: absolute;
   bottom: 0;
   left: 0;
-  padding-left: 15px;
+  padding-left: 8px;
   padding-top: 15px;
   padding-bottom: 5px;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: bolder;
   font-family: Helvetica, serif;
   width: 100%;
@@ -103,10 +118,13 @@ const size = computed(() => {
 }
 
 .el-row {
+  min-width: 540px;
   margin: 40px 100px;
 }
 
 .el-col {
+  width: 250px;
+  height: 350px;
   margin-bottom: 40px;
 }
 
@@ -116,5 +134,15 @@ hr {
   border-width: 0.7pt;
 }
 
+.page-container {
+  position: relative;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 </style>
