@@ -7,7 +7,7 @@
 
     <div style="flex: 1; display: flex; flex-wrap: wrap; justify-content: center; margin: 60px;">
       <div style="margin: 0 30px 50px;" v-for="card in cards"
-           :key="card.index">
+           :key="card.id">
         <div :style="'background-image: url(' + card.poster + '); background-size: cover;'"
              class="image-container">
           <div class="image-text">{{ card.name }}</div>
@@ -33,17 +33,24 @@ import {onMounted, ref} from 'vue'
 import axios from "axios";
 
 const cards = ref([])
+interface CardItem {
+  id: number;
+  poster: string;
+  name: string;
+}
 
 onMounted(() => {
   axios.get('https://api.wmdb.tv/api/v1/top?type=Imdb&skip=0&limit=100&lang=Cn')
       .then(res => {
         console.log(res.data)
         for (let i = 0; i < 20; i++) {
-          cards.value.push({
+          const cardData = res.data[i].data[0];
+          const card: CardItem = {
             id: i,
-            poster: res.data[i].data[0].poster,
-            name: res.data[i].data[0].name
-          });
+            poster: cardData.poster,
+            name: cardData.name,
+          };
+          cards.value.push(card);
         }
       })
       .catch(error => {
@@ -70,17 +77,19 @@ const pageSize = ref(20);
 const totalItems = ref(100);
 
 // 处理页数变化
-const handlePageChange = (newPage) => {
+const handlePageChange = (newPage: number) => {
   axios.get('https://api.wmdb.tv/api/v1/top?type=Imdb&skip=0&limit=1000&lang=Cn')
       .then(res => {
         console.log(res.data)
         cards.value = [];
         for (let i = (newPage - 1) * 20; i < newPage * 20; i++) {
-          cards.value.push({
+          const cardData = res.data[i].data[0];
+          const card: CardItem = {
             id: i,
-            poster: res.data[i].data[0].poster,
-            name: res.data[i].data[0].name
-          });
+            poster: cardData.poster,
+            name: cardData.name,
+          };
+          cards.value.push(card);
         }
       })
       .catch(error => {
@@ -106,9 +115,9 @@ const handlePageChange = (newPage) => {
   position: absolute;
   bottom: 0;
   left: 0;
-  padding-left: 8px;
+  padding-left: 6px;
   padding-top: 15px;
-  padding-bottom: 5px;
+  padding-bottom: 8px;
   font-size: 15px;
   font-weight: bolder;
   font-family: Helvetica, serif;
