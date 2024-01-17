@@ -5,8 +5,8 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/home',
-      name: 'home',
+      path: '/',
+      name: 'login',
       redirect: '/login',
       component: () => import('@/views/HomeView.vue'),
       children: [
@@ -27,11 +27,11 @@ const router = createRouter({
         }],
     },
     {
-      path: '/index',
+      path: '/',
       component: index,
-      redirect: '/',
+      redirect: '/index',
       children: [
-        { path: '/', name: 'timeline', component: () => import('@/components/TimelineComponent.vue')},
+        { path: '/index', name: 'timeline', component: () => import('@/components/TimelineComponent.vue')},
         { path: '/category/movie', name: 'movie', component: () => import('@/components/category/movie/MovieComponent.vue')},
         { path: '/category/airing', name: 'airing', component: () => import('@/components/category/AiringComponent.vue')},
         { path: '/category/anime/new-bangumi', name: 'new-bangumi', component: () => import('@/components/category/anime/NewBangumi.vue')},
