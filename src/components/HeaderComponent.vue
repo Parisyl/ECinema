@@ -13,7 +13,7 @@
       router
       @select="handleSelect"
     >
-      <el-menu-item @click="onClick('/')" index="0">
+      <el-menu-item @click="onClick('/index')" index="0">
         <i style="font-size: 25px; color: #4ea1d3">EasyCinema</i>
       </el-menu-item>
       <div class="flex-grow" />
