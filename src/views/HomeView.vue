@@ -3,39 +3,42 @@
     <el-container>
       <el-aside>
         <div class="home-view">
-          <router-view/>
+          <router-view />
         </div>
 
         <div class="align-to-center">
-          <router-link style="text-decoration: none; font-size: 15px;"  :to="`/login`">立即登录</router-link>
+          <router-link style="text-decoration: none; font-size: 15px" :to="`/login`"
+            >立即登录</router-link
+          >
           <el-divider direction="vertical"></el-divider>
-          <router-link style="text-decoration: none; font-size: 15px;" :to="`/register`">立即注册</router-link>
+          <router-link style="text-decoration: none; font-size: 15px" :to="`/register`"
+            >立即注册</router-link
+          >
           <el-divider direction="vertical"></el-divider>
-          <router-link style="text-decoration: none; font-size: 15px;" :to="`/recover`">忘记密码</router-link>
+          <router-link style="text-decoration: none; font-size: 15px" :to="`/recover`"
+            >忘记密码</router-link
+          >
           <el-divider direction="vertical"></el-divider>
-          <router-link style="text-decoration: none; font-size: 15px;" :to="`/index`">免费体验</router-link>
+          <router-link style="text-decoration: none; font-size: 15px" :to="`/index`"
+            >免费体验</router-link
+          >
         </div>
         <div class="beian">
-          <a style="color: grey; font-size: 12px;" href="https://beian.miit.gov.cn/">
+          <a style="color: grey; font-size: 12px" href="https://beian.miit.gov.cn/">
             <span>桂ICP备2022008455号-2</span>
           </a>
         </div>
       </el-aside>
-      <el-main class="poster">
-      </el-main>
+      <el-main class="poster"> </el-main>
     </el-container>
   </div>
 </template>
 
-
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
-
 .poster {
-  background-image: url(https://source.unsplash.com/1280x720/?movie);
+  background-image: url(https://source.unsplash.com/1280x900/?movie);
   background-size: cover;
   background-position: right center;
   width: 70vw;
@@ -67,10 +70,11 @@
 }
 
 a {
-  color: rgb(64, 158, 255);;
+  color: rgb(64, 158, 255);
 }
 
-@media screen and (max-width: 600px) { /* 调整 600px 为适当的阈值 */
+@media screen and (max-width: 600px) {
+  /* 调整 600px 为适当的阈值 */
   .common-layout {
     display: flex;
     flex-direction: column;
@@ -97,6 +101,5 @@ a {
     align-items: center;
   }
 }
-
-
 </style>
+
