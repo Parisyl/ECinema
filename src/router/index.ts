@@ -5,7 +5,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       redirect: '/login',
       component: () => import('@/views/HomeView.vue'),
@@ -28,12 +28,12 @@ const router = createRouter({
       ]
     },
     {
-      path: '/',
+      path: '/index',
       component: index,
-      redirect: '/index',
+      redirect: '/tl',
       children: [
         {
-          path: '/index',
+          path: '/tl',
           name: 'timeline',
           component: () => import('@/components/TimelineComponent.vue')
         },
